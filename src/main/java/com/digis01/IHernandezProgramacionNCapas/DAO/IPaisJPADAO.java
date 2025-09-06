@@ -4,5 +4,5 @@ import com.digis01.IHernandezProgramacionNCapas.JPA.Result;
 
 public interface IPaisJPADAO 
 {
-    Result GetAllPais();
+    Result GetAll();
 }

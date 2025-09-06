@@ -25,11 +25,14 @@ public class MunicipioJPADAOImplementation implements IMunicipioJPADAO
             result.object = queryMuncipio.getResultList();
                     
             result.correct = true;
-        } catch (Exception ex) 
+            result.status = 200;
+        } 
+        catch (Exception ex) 
         {
             result.correct = false;
             result.errorMessage = ex.getLocalizedMessage();
             result.ex = ex;
+            result.status = 500;
         }
         
         return result;

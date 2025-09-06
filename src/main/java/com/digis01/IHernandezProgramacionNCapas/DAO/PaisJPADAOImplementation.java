@@ -14,7 +14,7 @@ public class PaisJPADAOImplementation implements IPaisJPADAO
     private EntityManager entityManager;
     
     @Override
-    public Result GetAllPais() 
+    public Result GetAll() 
     {
         Result result = new Result();
         
@@ -24,11 +24,14 @@ public class PaisJPADAOImplementation implements IPaisJPADAO
             result.object = queryPais.getResultList();
             
             result.correct = true;
-        } catch (Exception ex) 
+            result.status = 200;
+        } 
+        catch (Exception ex) 
         {
             result.correct = false;
             result.errorMessage = ex.getLocalizedMessage();
             result.ex = ex;
+            result.status = 500;
         }
         
         return result;

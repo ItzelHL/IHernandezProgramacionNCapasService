@@ -25,11 +25,14 @@ public class EstadoJPADAOImplementation implements IEstadoJPADAO
             result.object = queryEstado.getResultList();
             
             result.correct = true;
+            result.status = 200;
+            
         } catch (Exception ex) 
         {
             result.correct = false;
             result.errorMessage = ex.getLocalizedMessage();
             result.ex = ex;
+            result.status = 500;
         }
         
         return result;

@@ -4,8 +4,6 @@ import com.digis01.IHernandezProgramacionNCapas.JPA.Rol;
 import com.digis01.IHernandezProgramacionNCapas.JPA.Result;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,11 +24,14 @@ public class RolJPADAOImplementation implements IRolJPADAO
             result.object = queryRol.getResultList();
             
             result.correct = true;
-        } catch (Exception ex) 
+            result.status = 200;
+        } 
+        catch (Exception ex) 
         {
             result.correct = false;
             result.errorMessage = ex.getLocalizedMessage();
             result.ex = ex;
+            result.status = 500;
         }
         
         return result;

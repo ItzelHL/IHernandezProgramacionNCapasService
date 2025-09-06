@@ -1,5 +1,6 @@
 package com.digis01.IHernandezProgramacionNCapas.JPA;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 
 public class Result 
@@ -9,5 +10,7 @@ public class Result
     public Exception ex;
     public Object object;
     public List<Object> objects;
+    @JsonIgnore
+    public int status;
 }
 

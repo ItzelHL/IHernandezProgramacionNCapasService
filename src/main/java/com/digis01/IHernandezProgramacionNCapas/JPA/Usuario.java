@@ -1,5 +1,6 @@
 package com.digis01.IHernandezProgramacionNCapas.JPA;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +11,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.transaction.Status;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +19,10 @@ import java.util.List;
 @Entity
 public class Usuario {
 
+    @JsonProperty("status")
+    @Column(name = "status")
+    private int Status;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idusuario")
@@ -68,10 +74,10 @@ public class Usuario {
 
     public Usuario() {}
 
-    public Usuario(int idUsuario, String imagen, String username, String nombre, String apellidoPaterno, String apellidoMaterno, 
-            Date fechaNacimiento, String sexo, String curp, String email, String password, String telefono, String celular, 
-            Rol rol, List<Direccion> direccion) 
+    public Usuario(int status, int idUsuario, String imagen, String username, String nombre, String apellidoPaterno, String apellidoMaterno, 
+            Date fechaNacimiento, String sexo, String curp, String email, String password, String telefono, String celular, List<Direccion> direcciones) 
     {
+        this.Status = status;
         this.IdUsuario = idUsuario;
         this.Imagen = imagen;
         this.Username = username;
@@ -85,8 +91,16 @@ public class Usuario {
         this.Password = password;
         this.Telefono = telefono;
         this.Celular = celular;
-        this.Rol = rol;
-        this.Direcciones = direccion;
+        this.Direcciones = direcciones;
+    }
+
+    public void setStatus(int status) 
+    {
+        this.Status = status;
+    }
+    public int getStatus() 
+    {
+        return Status;
     }
 
     public void setIdUsuario(int idUsuario) 
