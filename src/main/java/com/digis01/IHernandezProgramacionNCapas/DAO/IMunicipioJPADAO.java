@@ -4,5 +4,7 @@ import com.digis01.IHernandezProgramacionNCapas.JPA.Result;
 
 public interface IMunicipioJPADAO 
 {
-    Result MunicipioByEstadoGetAll(int idEstado);
+    Result GetAll();
+    
+    Result MunicipioGetByEstado(int idEstado);
 }

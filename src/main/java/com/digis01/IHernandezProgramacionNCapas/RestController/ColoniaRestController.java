@@ -2,6 +2,10 @@ package com.digis01.IHernandezProgramacionNCapas.RestController;
 
 import com.digis01.IHernandezProgramacionNCapas.DAO.ColoniaJPADAOImplementation;
 import com.digis01.IHernandezProgramacionNCapas.JPA.Result;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "REST Controller de Colonia", description = "Controlador con métodos para Colonia.")
 @RestController
 @RequestMapping("api/colonia")
 public class ColoniaRestController 
@@ -16,11 +21,29 @@ public class ColoniaRestController
     @Autowired
     ColoniaJPADAOImplementation coloniaJPADAOImplementation;
     
-    @GetMapping("/municipio/{IdMunicipio}")
-    public ResponseEntity GetAll(@PathVariable("IdMunicipio") int IdMunicipio)
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "OK. Estas son las colonias."),
+        @ApiResponse(responseCode = "500", description = "Error inesperado del sistema.")})
+    @Operation(summary = "Colonia GetAll", description = "Trae todas las colonias.")
+    @GetMapping()
+    public ResponseEntity GetAll()
     {
         Result result;
-        result = coloniaJPADAOImplementation.ColoniaByMunicipioGetAll(IdMunicipio);
+        result = coloniaJPADAOImplementation.GetAll();
+        
+        return ResponseEntity.status(result.status).body(result);
+    }
+    
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "OK. Estas son las colonias según el municipio seleccionado."),
+        @ApiResponse(responseCode = "400", description = "Bad Request. Verifique los datos ingresados."),
+        @ApiResponse(responseCode = "500", description = "Error inesperado del sistema.")})
+    @Operation(summary = "Colonia by IdMunicipio", description = "Trae todas las colonias según el municipio seleccionado")
+    @GetMapping("/municipio/{IdMunicipio}")
+    public ResponseEntity GetById(@PathVariable("IdMunicipio") int IdMunicipio)
+    {
+        Result result;
+        result = coloniaJPADAOImplementation.ColoniaGetByMunicipio(IdMunicipio);
         
         return ResponseEntity.status(result.status).body(result);
     }

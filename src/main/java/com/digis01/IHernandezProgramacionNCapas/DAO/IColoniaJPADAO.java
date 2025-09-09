@@ -4,5 +4,7 @@ import com.digis01.IHernandezProgramacionNCapas.JPA.Result;
 
 public interface IColoniaJPADAO 
 {
-    Result ColoniaByMunicipioGetAll(int idMunicipio);
+    Result GetAll();
+    
+    Result ColoniaGetByMunicipio(int idMunicipio);
 }

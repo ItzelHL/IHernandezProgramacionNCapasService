@@ -14,7 +14,29 @@ public class MunicipioJPADAOImplementation implements IMunicipioJPADAO
     EntityManager entityManager;
 
     @Override
-    public Result MunicipioByEstadoGetAll(int IdEstado)
+    public Result GetAll()
+    {
+        Result result = new Result();
+        try 
+        {
+            TypedQuery<Municipio> queryMunicipio = entityManager.createQuery("FROM Municipio ORDER BY IdMunicipio", Municipio.class);
+            result.object = queryMunicipio.getResultList();
+            
+            result.correct = true;
+            result.status = 200;
+        } 
+        catch (Exception ex) 
+        {
+            result.correct = false;
+            result.errorMessage = ex.getLocalizedMessage();
+            result.ex = ex;
+            result.status = 500;
+        }
+        return result;
+    }
+    
+    @Override
+    public Result MunicipioGetByEstado(int IdEstado)
     {
         Result result = new Result();
         

@@ -4,5 +4,7 @@ import com.digis01.IHernandezProgramacionNCapas.JPA.Result;
 
 public interface IEstadoJPADAO 
 {
-    Result EstadoByPaisGetAll(int IdPais);
+    Result GetAll();
+    
+    Result EstadoGetByPais(int IdPais);
 }
