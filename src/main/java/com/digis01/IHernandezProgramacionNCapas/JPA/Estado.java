@@ -14,37 +14,37 @@ public class Estado
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idestado")
-    private int IdEstado;
+    private int idEstado;
     
     @Column(name = "nombre")
     private String Nombre;
     
     @ManyToOne
     @JoinColumn(name = "idpais")
-    public Pais Pais;
+    public Pais pais;
     
     public Estado(){}
 
     public Estado(int idEstado, String nombre) 
     {
-        this.IdEstado = idEstado;
+        this.idEstado = idEstado;
         this.Nombre = nombre;
     }
 
     public Estado(int idEstado, String nombre, Pais pais) 
     {
-        this.IdEstado = idEstado;
+        this.idEstado = idEstado;
         this.Nombre = nombre;
-        this.Pais = pais;
+        this.pais = pais;
     }
     
     public void setIdEstado(int idEstado) 
     {
-        this.IdEstado = idEstado;
+        this.idEstado = idEstado;
     }
     public int getIdEstado() 
     {
-        return IdEstado;
+        return idEstado;
     }
 
     public void setNombre(String nombre) 

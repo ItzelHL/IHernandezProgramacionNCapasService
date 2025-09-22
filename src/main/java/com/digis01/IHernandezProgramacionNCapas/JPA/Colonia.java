@@ -14,7 +14,7 @@ public class Colonia
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idcolonia")
-    private int IdColonia;
+    private int idColonia;
     
     @Column(name = "nombre")
     private String Nombre;
@@ -24,33 +24,33 @@ public class Colonia
     
     @ManyToOne
     @JoinColumn(name = "idmunicipio")
-    public Municipio Municipio;
+    public Municipio municipio;
     
     
     public Colonia(){}
 
     public Colonia(int idColonia, String nombre, String codigoPostal) 
     {
-        this.IdColonia = idColonia;
+        this.idColonia = idColonia;
         this.Nombre = nombre;
         this.CodigoPostal = codigoPostal;
     }
 
     public Colonia(int idColonia, String nombre, String codigoPostal, Municipio municipio) 
     {
-        this.IdColonia = idColonia;
+        this.idColonia = idColonia;
         this.Nombre = nombre;
         this.CodigoPostal = codigoPostal;
-        this.Municipio = municipio;
+        this.municipio = municipio;
     }
 
     public void setIdColonia(int idColonia)
     {
-        this.IdColonia = idColonia;
+        this.idColonia = idColonia;
     }
     public int getIdColonia()
     {
-        return IdColonia;
+        return idColonia;
     }
    
     public void setNombre(String nombre)

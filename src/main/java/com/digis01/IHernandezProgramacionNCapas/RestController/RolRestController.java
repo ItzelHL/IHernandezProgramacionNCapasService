@@ -1,5 +1,6 @@
 package com.digis01.IHernandezProgramacionNCapas.RestController;
 
+import com.digis01.IHernandezProgramacionNCapas.DAO.IRepositoryRol;
 import com.digis01.IHernandezProgramacionNCapas.DAO.RolJPADAOImplementation;
 import com.digis01.IHernandezProgramacionNCapas.JPA.Result;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,18 +20,39 @@ import org.springframework.web.bind.annotation.RestController;
 public class RolRestController 
 {
     @Autowired
+    private IRepositoryRol iRepositoryRol;
+    @Autowired
     private RolJPADAOImplementation rolJPADAOImplementation;
     
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "OK. Estos son los roles."),
-        @ApiResponse(responseCode = "500", description = "Error inesperado del sistema.")})
-    @Operation(summary = "Rol GetAll", description = "Trae todos los roles")
+//    @ApiResponses(value = {
+//        @ApiResponse(responseCode = "200", description = "OK. Estos son los roles."),
+//        @ApiResponse(responseCode = "500", description = "Error inesperado del sistema.")})
+//    @Operation(summary = "Rol GetAll", description = "Trae todos los roles")
+//    @GetMapping
+//    public ResponseEntity GetAll(){
+//        
+//        Result result;
+//        result = rolJPADAOImplementation.GetAll();
+//
+//        return ResponseEntity.status(result.status).body(result);
+//    }
+    
+        //    ----------------------------------------------------------------------- JPAREPOSITORY -----------------------------------------------------------------------
     @GetMapping
-    public ResponseEntity GetAll(){
-        
-        Result result;
-        result = rolJPADAOImplementation.GetAll();
-
-        return ResponseEntity.status(result.status).body(result);
+    public ResponseEntity GetAll()
+    {
+        Result result = new Result();
+        try 
+        {
+            result.object = iRepositoryRol.findAll();
+            result.correct = true;
+            
+        } catch (Exception ex) 
+        {
+            result.correct = false;
+            result.errorMessage = ex.getLocalizedMessage();
+            result.ex = ex;
+        }
+        return ResponseEntity.ok(result);
     }
 }
