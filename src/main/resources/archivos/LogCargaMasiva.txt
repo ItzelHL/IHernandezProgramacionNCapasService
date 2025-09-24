@@ -27,3 +27,11 @@ c0|PRUEBA.xlsx|2|2025-09-12 16:23:06|Archivo procesado con éxito.
 96|PRUEBA4.txt|2|2025-09-12 16:38:03|Archivo procesado con éxito.
 ef|PRUEBA5.txt|1|2025-09-12 16:41:32|
 ef|PRUEBA5.txt|2|2025-09-12 16:41:59|Archivo procesado con éxito.
+63|PRUEBA1.xlsx|1|2025-09-24 10:45:46|
+
+63|PRUEBA_CargaMasiva.txt|0|2025-09-24 12:18:09|Expirado por inactividad (>2 min)
+63|PRUEBA_CargaMasiva.txt|1|2025-09-24 12:18:09|
+
+63|PRUEBA_CargaMasiva.txt|0|2025-09-24 12:26:11|Expirado por inactividad (>2 min)
+63|PRUEBA_CargaMasiva.txt|1|2025-09-24 12:26:11|
+63|PRUEBA_CargaMasiva.txt|2|2025-09-24 12:26:13|Archivo procesado con éxito.
