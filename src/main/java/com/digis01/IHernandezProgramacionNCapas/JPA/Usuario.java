@@ -11,7 +11,6 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import jakarta.transaction.Status;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +32,7 @@ public class Usuario {
     private String Imagen;
 
     @Column(name = "username")
-    private String Username;
+    private String username;
 
     @Column(name = "nombre")
     private String Nombre;
@@ -80,7 +79,7 @@ public class Usuario {
         this.Status = status;
         this.IdUsuario = idUsuario;
         this.Imagen = imagen;
-        this.Username = username;
+        this.username = username;
         this.Nombre = nombre;
         this.ApellidoPaterno = apellidoPaterno;
         this.ApellidoMaterno = apellidoMaterno;
@@ -123,11 +122,11 @@ public class Usuario {
 
     public void setUsername(String username) 
     {
-        this.Username = username;
+        this.username = username;
     }
     public String getUsername() 
     {
-        return Username;
+        return username;
     }
 
     public void setNombre(String nombre) 

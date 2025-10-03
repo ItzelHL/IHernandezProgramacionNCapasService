@@ -2,7 +2,6 @@ package com.digis01.IHernandezProgramacionNCapas.DAO;
 
 import com.digis01.IHernandezProgramacionNCapas.JPA.Direccion;
 import com.digis01.IHernandezProgramacionNCapas.JPA.Result;
-import com.digis01.IHernandezProgramacionNCapas.JPA.Usuario;
 
 public interface IDireccionJPADAO 
 {

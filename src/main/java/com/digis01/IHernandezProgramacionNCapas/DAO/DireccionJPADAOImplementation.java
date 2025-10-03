@@ -1,13 +1,9 @@
 package com.digis01.IHernandezProgramacionNCapas.DAO;
 
-import com.digis01.IHernandezProgramacionNCapas.JPA.Colonia;
 import com.digis01.IHernandezProgramacionNCapas.JPA.Direccion;
-import com.digis01.IHernandezProgramacionNCapas.JPA.Usuario;
 import com.digis01.IHernandezProgramacionNCapas.JPA.Result;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
