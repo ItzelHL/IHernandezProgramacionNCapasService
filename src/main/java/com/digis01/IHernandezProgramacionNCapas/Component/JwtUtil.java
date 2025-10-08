@@ -30,7 +30,7 @@ public class JwtUtil
                                           .claim("role", role)
                                           .setId(jti)
                                           .setIssuedAt(new Date())
-                                          .setExpiration(new Date(System.currentTimeMillis() + 60_000))
+                                          .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                                           .signWith(key)
                                           .compact();
     }
@@ -48,7 +48,7 @@ public class JwtUtil
         String jti = claims.getBody().getId();
         
         int current = usageStore.getOrDefault(jti, 0);
-        if (current > 2) 
+        if (current > 10) 
         {
             return false;
         }

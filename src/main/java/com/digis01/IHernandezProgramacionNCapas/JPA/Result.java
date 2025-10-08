@@ -13,4 +13,3 @@ public class Result
     @JsonIgnore
     public int status;
 }
-

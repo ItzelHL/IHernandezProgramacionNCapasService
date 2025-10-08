@@ -5,9 +5,6 @@ import com.digis01.IHernandezProgramacionNCapas.DAO.IRepositoryDireccion;
 import com.digis01.IHernandezProgramacionNCapas.JPA.Direccion;
 import com.digis01.IHernandezProgramacionNCapas.JPA.Result;
 import com.digis01.IHernandezProgramacionNCapas.JPA.Usuario;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +27,98 @@ public class DireccionRestController
     @Autowired
     private DireccionJPADAOImplementation direccionJPADAOImplementation;
     
+         //    ----------------------------------------------------------------------- JPAREPOSITORY -----------------------------------------------------------------------
+    @GetMapping("detail/{IdDireccion}")
+    public ResponseEntity GetById(@PathVariable("IdDireccion") int IdDireccion)
+    {
+        Result result = new Result();
+        try 
+        {
+            if(iRepositoryDireccion.existsById(IdDireccion))
+            {
+                result.object = iRepositoryDireccion.findById(IdDireccion);
+                result.correct = true;
+            }
+            
+        } catch (Exception ex) 
+        {
+            result.correct = false;
+            result.errorMessage = ex.getLocalizedMessage();
+            result.ex = ex;
+        }
+        
+        return ResponseEntity.ok(result);
+    }
+    
+    @PostMapping("add/{IdUsuario}")
+    public ResponseEntity AddDireccion(@PathVariable("IdUsuario") int IdUsuario, @RequestBody Direccion direccion)
+    {
+        Result result = new Result();
+        try 
+        {
+            direccion.Usuario = new Usuario();
+            direccion.Usuario.setIdUsuario(IdUsuario);
+            result.object = iRepositoryDireccion.save(direccion);
+            result.correct = true; 
+            
+        } catch (Exception ex) 
+        {
+            result.correct = false;
+            result.errorMessage = ex.getLocalizedMessage();
+            result.ex = ex;
+        }
+        return  ResponseEntity.ok(result);
+    }
+    
+    @PutMapping("{IdUsuario}/direccion/{IdDireccion}")
+    public ResponseEntity UpdateDireccion(@PathVariable("IdUsuario") int IdUsuario, @PathVariable("IdDireccion") int IdDireccion,
+                                                                        @RequestBody Direccion direccion)
+    {
+        Result result = new Result();
+        try 
+        {
+            if(iRepositoryDireccion.existsById(IdDireccion))
+            {
+                Usuario usuario = new Usuario();
+                direccion.Usuario = usuario;
+                direccion.Usuario.setIdUsuario(IdUsuario);
+                direccion.setIdDireccion(IdDireccion);
+                result.object = iRepositoryDireccion.save(direccion);
+                result.correct = true;
+            }
+            
+        } catch (Exception ex) 
+        {
+            result.correct = false;
+            result.errorMessage = ex.getLocalizedMessage();
+            result.ex = ex;
+        }
+        
+        return ResponseEntity.ok(result);
+    }
+    
+    @DeleteMapping("{IdDireccion}")
+    public ResponseEntity Delete(@PathVariable("IdDireccion") int IdDireccion) 
+    {
+        Result result = new Result();
+        try 
+        {
+            if (iRepositoryDireccion.existsById(IdDireccion)) 
+            {
+                Direccion direccion = new Direccion();
+                direccion.setIdDireccion(IdDireccion);
+                iRepositoryDireccion.delete(direccion);
+                result.correct = true;
+            }
+        } catch (Exception ex) 
+        {
+            result.correct = false;
+            result.errorMessage = ex.getLocalizedMessage();
+            result.ex = ex;
+        }
+        
+        return ResponseEntity.ok(result);
+    }
     
     
 //    @ApiResponses(value = {
@@ -91,99 +180,4 @@ public class DireccionRestController
 //
 //        return ResponseEntity.status(result.status).body(result);
 //    }
-    
-    
-    
-     //    ----------------------------------------------------------------------- JPAREPOSITORY -----------------------------------------------------------------------
-    @PostMapping("add/{IdUsuario}")
-    public ResponseEntity AddDireccion(@PathVariable("IdUsuario") int IdUsuario, @RequestBody Direccion direccion)
-    {
-        Result result = new Result();
-        try 
-        {
-            direccion.Usuario = new Usuario();
-            direccion.Usuario.setIdUsuario(IdUsuario);
-            result.object = iRepositoryDireccion.save(direccion);
-            result.correct = true; 
-            
-        } catch (Exception ex) 
-        {
-            result.correct = false;
-            result.errorMessage = ex.getLocalizedMessage();
-            result.ex = ex;
-        }
-        return  ResponseEntity.ok(result);
-    }
-    
-    @GetMapping("detail/{IdDireccion}")
-    public ResponseEntity GetById(@PathVariable("IdDireccion") int IdDireccion)
-    {
-        Result result = new Result();
-        try 
-        {
-            if(iRepositoryDireccion.existsById(IdDireccion))
-            {
-                result.object = iRepositoryDireccion.findById(IdDireccion);
-                result.correct = true;
-            }
-            
-        } catch (Exception ex) 
-        {
-            result.correct = false;
-            result.errorMessage = ex.getLocalizedMessage();
-            result.ex = ex;
-        }
-        
-        return ResponseEntity.ok(result);
-    }
-    
-    @PutMapping("{IdUsuario}/direccion/{IdDireccion}")
-    public ResponseEntity UpdateDireccion(@PathVariable("IdUsuario") int IdUsuario, @PathVariable("IdDireccion") int IdDireccion,
-                                                                        @RequestBody Direccion direccion)
-    {
-        Result result = new Result();
-        try 
-        {
-            if(iRepositoryDireccion.existsById(IdDireccion))
-            {
-                Usuario usuario = new Usuario();
-                direccion.Usuario = usuario;
-                direccion.Usuario.setIdUsuario(IdUsuario);
-                direccion.setIdDireccion(IdDireccion);
-                result.object = iRepositoryDireccion.save(direccion);
-                result.correct = true;
-            }
-            
-        } catch (Exception ex) 
-        {
-            result.correct = false;
-            result.errorMessage = ex.getLocalizedMessage();
-            result.ex = ex;
-        }
-        
-        return ResponseEntity.ok(result);
-    }
-    
-    @DeleteMapping("{IdDireccion}")
-    public ResponseEntity Delete(@PathVariable("IdDireccion") int IdDireccion) 
-    {
-        Result result = new Result();
-        try 
-        {
-            if (iRepositoryDireccion.existsById(IdDireccion)) 
-            {
-                Direccion direccion = new Direccion();
-                direccion.setIdDireccion(IdDireccion);
-                iRepositoryDireccion.delete(direccion);
-                result.correct = true;
-            }
-        } catch (Exception ex) 
-        {
-            result.correct = false;
-            result.errorMessage = ex.getLocalizedMessage();
-            result.ex = ex;
-        }
-        
-        return ResponseEntity.ok(result);
-    }
 }

@@ -1,8 +1,6 @@
 package com.digis01.IHernandezProgramacionNCapas.RestController;
 
 import com.digis01.IHernandezProgramacionNCapas.JPA.Usuario;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
