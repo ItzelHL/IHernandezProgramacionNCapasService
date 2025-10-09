@@ -13,9 +13,9 @@ public class UsuarioService implements UserDetailsService
 {
     private final IRepositoryUsuario iRepositoryUsuario;
     
-    public UsuarioService(IRepositoryUsuario iUsuario)
+    public UsuarioService(IRepositoryUsuario iRepositoryUsuario)
     {
-        this.iRepositoryUsuario = iUsuario;
+        this.iRepositoryUsuario = iRepositoryUsuario;
     }
 
     @Override
@@ -30,5 +30,4 @@ public class UsuarioService implements UserDetailsService
                 .disabled(!(usuario.getStatus() == 1))
                 .build();
     }
-    
 }
