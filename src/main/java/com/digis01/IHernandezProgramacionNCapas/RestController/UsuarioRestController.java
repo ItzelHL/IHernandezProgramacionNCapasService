@@ -180,6 +180,27 @@ public class UsuarioRestController
         return ResponseEntity.ok(result);
     }
     
+    @GetMapping("username/{username}")
+    public ResponseEntity GetByUsername(@PathVariable("username") String username)
+    {
+        Result result = new Result();
+        try 
+        {
+            Usuario usuario = iRepositoryUsuario.findByUsername(username);
+            if (usuario != null) 
+            {
+                result.object = usuario;
+                result.correct = true;
+            }
+            
+        } catch (Exception ex) 
+        {
+            result.correct = false;
+            result.errorMessage = ex.getLocalizedMessage();
+            result.ex = ex;
+        }
+        return ResponseEntity.ok(result);
+    }
     
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "OK. El archivo se cargó correctamente."),

@@ -48,12 +48,41 @@ public class JwtUtil
         String jti = claims.getBody().getId();
         
         int current = usageStore.getOrDefault(jti, 0);
-        if (current > 10) 
+        if (current > 50) 
         {
             return false;
         }
         
         usageStore.put(jti, current + 1);
         return true;
+    }
+    
+    // Extrae el username (Subject) del token
+    public String extractUsername(String token) 
+    {
+        return extractAllClaims(token).getSubject();
+    }
+
+// Extrae el rol del token
+    public String extractRole(String token) 
+    {
+        Object role = extractAllClaims(token).get("role");
+        return role != null ? role.toString() : null;
+    }
+
+// Extrae todas las Claims del token
+    private Claims extractAllClaims(String token) 
+    {
+        // Elimina "Bearer " si viene con el prefijo
+        if (token.startsWith("Bearer ")) 
+        {
+            token = token.substring(7);
+        }
+
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 }

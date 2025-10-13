@@ -31,7 +31,10 @@ public class SecurityConfig
         return http.csrf(csrf -> csrf.disable())
                          .authorizeHttpRequests(auth -> auth
                                         .requestMatchers("/auth/**", "/login", "/login/**", "/logout",
-                                                "/error", "/css/**", "/js/**", "/images/**")
+                                                "/error", "/css/**", "/js/**", "/images/**", "/api/rol/**", 
+                                                "/api/pais/**", "/api/municipio/**", "/api/municipio/estado/**",
+                                                "/api/estado/**", "/api/estado/pais/**", "/api/direccion/detail/**", 
+                                                "/api/colonia/**","/api/colonia/municipio/**", "/api/usuario/username/**")
                                                 .permitAll()
                         
                                         .requestMatchers(HttpMethod.DELETE, "/api/usuario/**", "/api/direccion/**")
@@ -44,15 +47,10 @@ public class SecurityConfig
                                         .requestMatchers(HttpMethod.PATCH, "/api/usuario/status/**")
                                                 .hasRole("Administrador")
                         
-                                        .requestMatchers(HttpMethod.GET, "/api/usuario", "/api/usuario/**", "/api/usuario/action/**", 
-                                                "/api/rol/**", "/api/pais/**", "/api/municipio/**", "/api/municipio/estado/**",
-                                                "/api/estado/**", "/api/estado/pais/**", "/api/direccion/detail/**", 
-                                                "/api/colonia/**","/api/colonia/municipio/**")
+                                        .requestMatchers(HttpMethod.GET, "/api/usuario", "/api/usuario/**", "/api/usuario/action/**", "/api/usuario/username/**")
                                                 .hasAnyRole("Administrador", "Editor", "Lector", "Invitado")
                                         .anyRequest().authenticated())
                 
-//                                        .formLogin(form -> form
-//                                                .loginPage("/auth/login").permitAll())
                 
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
