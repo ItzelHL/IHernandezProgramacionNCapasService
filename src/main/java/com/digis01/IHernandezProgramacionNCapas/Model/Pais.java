@@ -1,4 +1,4 @@
-package com.digis01.IHernandezProgramacionNCapas.JPA;
+package com.digis01.IHernandezProgramacionNCapas.Model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,9 +1,9 @@
 package com.digis01.IHernandezProgramacionNCapas.RestController;
 
-import com.digis01.IHernandezProgramacionNCapas.DAO.IRepositoryMunicipio;
+import com.digis01.IHernandezProgramacionNCapas.Repository.IRepositoryMunicipio;
 import com.digis01.IHernandezProgramacionNCapas.DAO.MunicipioJPADAOImplementation;
-import com.digis01.IHernandezProgramacionNCapas.JPA.Municipio;
-import com.digis01.IHernandezProgramacionNCapas.JPA.Result;
+import com.digis01.IHernandezProgramacionNCapas.Model.Municipio;
+import com.digis01.IHernandezProgramacionNCapas.Model.Result;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

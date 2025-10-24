@@ -1,4 +1,4 @@
-package com.digis01.IHernandezProgramacionNCapas.JPA;
+package com.digis01.IHernandezProgramacionNCapas.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;

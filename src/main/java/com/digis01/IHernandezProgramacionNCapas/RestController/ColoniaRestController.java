@@ -1,9 +1,9 @@
 package com.digis01.IHernandezProgramacionNCapas.RestController;
 
 import com.digis01.IHernandezProgramacionNCapas.DAO.ColoniaJPADAOImplementation;
-import com.digis01.IHernandezProgramacionNCapas.DAO.IRepositoryColonia;
-import com.digis01.IHernandezProgramacionNCapas.JPA.Colonia;
-import com.digis01.IHernandezProgramacionNCapas.JPA.Result;
+import com.digis01.IHernandezProgramacionNCapas.Repository.IRepositoryColonia;
+import com.digis01.IHernandezProgramacionNCapas.Model.Colonia;
+import com.digis01.IHernandezProgramacionNCapas.Model.Result;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

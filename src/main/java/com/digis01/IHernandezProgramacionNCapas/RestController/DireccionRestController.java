@@ -1,10 +1,10 @@
 package com.digis01.IHernandezProgramacionNCapas.RestController;
 
 import com.digis01.IHernandezProgramacionNCapas.DAO.DireccionJPADAOImplementation;
-import com.digis01.IHernandezProgramacionNCapas.DAO.IRepositoryDireccion;
-import com.digis01.IHernandezProgramacionNCapas.JPA.Direccion;
-import com.digis01.IHernandezProgramacionNCapas.JPA.Result;
-import com.digis01.IHernandezProgramacionNCapas.JPA.Usuario;
+import com.digis01.IHernandezProgramacionNCapas.Repository.IRepositoryDireccion;
+import com.digis01.IHernandezProgramacionNCapas.Model.Direccion;
+import com.digis01.IHernandezProgramacionNCapas.Model.Result;
+import com.digis01.IHernandezProgramacionNCapas.Model.Usuario;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

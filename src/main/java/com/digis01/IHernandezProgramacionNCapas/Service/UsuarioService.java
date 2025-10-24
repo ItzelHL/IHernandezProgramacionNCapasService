@@ -1,7 +1,7 @@
 package com.digis01.IHernandezProgramacionNCapas.Service;
 
-import com.digis01.IHernandezProgramacionNCapas.DAO.IRepositoryUsuario;
-import com.digis01.IHernandezProgramacionNCapas.JPA.Usuario;
+import com.digis01.IHernandezProgramacionNCapas.Repository.IRepositoryUsuario;
+import com.digis01.IHernandezProgramacionNCapas.Model.Usuario;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,5 +29,10 @@ public class UsuarioService implements UserDetailsService
                 .accountLocked(!(usuario.getStatus() == 1))
                 .disabled(!(usuario.getStatus() == 1))
                 .build();
+    }
+    
+    public Usuario getByUsername(String username) 
+    {
+        return iRepositoryUsuario.findByUsername(username);
     }
 }

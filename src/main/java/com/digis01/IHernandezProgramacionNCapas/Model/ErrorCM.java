@@ -1,4 +1,4 @@
-package com.digis01.IHernandezProgramacionNCapas.JPA;
+package com.digis01.IHernandezProgramacionNCapas.Model;
 
 public class ErrorCM 
 {

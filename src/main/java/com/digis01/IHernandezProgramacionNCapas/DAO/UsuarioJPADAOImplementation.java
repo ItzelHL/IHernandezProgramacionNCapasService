@@ -1,12 +1,12 @@
 package com.digis01.IHernandezProgramacionNCapas.DAO;
 
 import com.digis01.IHernandezProgramacionNCapas.DAO.UsuarioJPADAOImplementation.EstadoArchivo;
-import com.digis01.IHernandezProgramacionNCapas.JPA.Colonia;
-import com.digis01.IHernandezProgramacionNCapas.JPA.Direccion;
-import com.digis01.IHernandezProgramacionNCapas.JPA.ErrorCM;
-import com.digis01.IHernandezProgramacionNCapas.JPA.Result;
-import com.digis01.IHernandezProgramacionNCapas.JPA.Rol;
-import com.digis01.IHernandezProgramacionNCapas.JPA.Usuario;
+import com.digis01.IHernandezProgramacionNCapas.Model.Colonia;
+import com.digis01.IHernandezProgramacionNCapas.Model.Direccion;
+import com.digis01.IHernandezProgramacionNCapas.Model.ErrorCM;
+import com.digis01.IHernandezProgramacionNCapas.Model.Result;
+import com.digis01.IHernandezProgramacionNCapas.Model.Rol;
+import com.digis01.IHernandezProgramacionNCapas.Model.Usuario;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;

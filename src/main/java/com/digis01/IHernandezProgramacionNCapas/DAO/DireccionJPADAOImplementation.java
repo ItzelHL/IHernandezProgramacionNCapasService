@@ -1,7 +1,7 @@
 package com.digis01.IHernandezProgramacionNCapas.DAO;
 
-import com.digis01.IHernandezProgramacionNCapas.JPA.Direccion;
-import com.digis01.IHernandezProgramacionNCapas.JPA.Result;
+import com.digis01.IHernandezProgramacionNCapas.Model.Direccion;
+import com.digis01.IHernandezProgramacionNCapas.Model.Result;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

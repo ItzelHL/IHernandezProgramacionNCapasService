@@ -1,0 +1,70 @@
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>Verificación de cuenta</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f6f8fb;
+                padding: 30px;
+            }
+            .container {
+                background: white;
+                border-radius: 10px;
+                padding: 25px;
+                max-width: 600px;
+                margin: auto;
+                box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            }
+            h2 {
+                color: #2a3f73;
+                text-align: center;
+            }
+            .credenciales {
+                background: #f2f4f8;
+                padding: 10px;
+                border-radius: 8px;
+                margin: 15px 0;
+            }
+            .credenciales p {
+                margin: 5px 0;
+                font-size: 15px;
+            }
+            a.boton {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #2a3f73;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+            }
+            a.boton:hover {
+                background-color: #1e305c;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div class="container">
+            <h2>Bienvenido(a)</h2>
+            <p>Hola, <strong th:text="${nombre}">Usuario</strong>,</p>
+            <p>Tu cuenta ha sido creada por un administrador. A continuación encontrarás tus credenciales de acceso:</p>
+
+            <div class="credenciales">
+                <p><strong>Usuario:</strong> <span th:text="${username}">usuario</span></p>
+                <p><strong>Contraseña:</strong> <span th:text="${password}">contraseña</span></p>
+            </div>
+
+            <p>Antes de poder iniciar sesión, debes verificar tu cuenta haciendo clic en el siguiente botón:</p>
+
+            <p style="text-align:center;">
+                <a class="boton" th:href="${enlace}">Verificar cuenta</a>
+            </p>
+
+            <p>Si no solicitaste esta cuenta, puedes ignorar este correo.</p>
+            <hr>
+            <p style="font-size: 12px; color: #777; text-align: center;">© 2025 Sistema IHernandez | Mensaje automático, no responder.</p>
+        </div>
+    </body>
+</html>

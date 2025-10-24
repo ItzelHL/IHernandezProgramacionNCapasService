@@ -34,7 +34,8 @@ public class SecurityConfig
                                                 "/error", "/css/**", "/js/**", "/images/**", "/api/rol/**", 
                                                 "/api/pais/**", "/api/municipio/**", "/api/municipio/estado/**",
                                                 "/api/estado/**", "/api/estado/pais/**", "/api/direccion/detail/**", 
-                                                "/api/colonia/**","/api/colonia/municipio/**", "/api/usuario/username/**")
+                                                "/api/colonia/**","/api/colonia/municipio/**", "/api/usuario/username/**",
+                                                "api/usuario/verify")
                                                 .permitAll()
                         
                                         .requestMatchers(HttpMethod.DELETE, "/api/usuario/**", "/api/direccion/**")

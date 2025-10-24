@@ -1,6 +1,6 @@
-package com.digis01.IHernandezProgramacionNCapas.DAO;
+package com.digis01.IHernandezProgramacionNCapas.Repository;
 
-import com.digis01.IHernandezProgramacionNCapas.JPA.Colonia;
+import com.digis01.IHernandezProgramacionNCapas.Model.Colonia;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

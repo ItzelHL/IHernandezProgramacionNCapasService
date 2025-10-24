@@ -1,8 +1,8 @@
 package com.digis01.IHernandezProgramacionNCapas.RestController;
 
-import com.digis01.IHernandezProgramacionNCapas.DAO.IRepositoryRol;
+import com.digis01.IHernandezProgramacionNCapas.Repository.IRepositoryRol;
 import com.digis01.IHernandezProgramacionNCapas.DAO.RolJPADAOImplementation;
-import com.digis01.IHernandezProgramacionNCapas.JPA.Result;
+import com.digis01.IHernandezProgramacionNCapas.Model.Result;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

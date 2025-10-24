@@ -1,4 +1,4 @@
-package com.digis01.IHernandezProgramacionNCapas.JPA;
+package com.digis01.IHernandezProgramacionNCapas.Model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.CascadeType;
@@ -14,55 +14,59 @@ import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 @Entity
-public class Usuario {
-
+@Data
+@AllArgsConstructor
+public class Usuario 
+{
     @JsonProperty("status")
     @Column(name = "status")
-    private int Status;
+    private int status;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idusuario")
-    private int IdUsuario;
+    private int idUsuario;
 
     @Lob
     @Column(name = "imagenusuario")
-    private String Imagen;
+    private String imagen;
 
     @Column(name = "username")
     private String username;
 
     @Column(name = "nombre")
-    private String Nombre;
+    private String nombre;
 
     @Column(name = "apellidopaterno")
-    private String ApellidoPaterno;
+    private String apellidoPaterno;
 
     @Column(name = "apellidomaterno")
-    private String ApellidoMaterno;
+    private String apellidoMaterno;
 
     @Column(name = "fechanacimiento")
-    private Date FechaNacimiento;
+    private Date fechaNacimiento;
 
     @Column(name = "sexo")
-    private String Sexo;
+    private String sexo;
 
     @Column(name = "curp")
-    private String Curp;
+    private String curp;
 
     @Column(name = "email")
-    private String Email;
+    private String email;
 
     @Column(name = "password")
-    private String Password;
+    private String password;
 
     @Column(name = "telefono")
-    private String Telefono;
+    private String telefono;
 
     @Column(name = "celular")
-    private String Celular;
+    private String celular;
 
     @ManyToOne
     @JoinColumn(name = "idrol")
@@ -70,54 +74,58 @@ public class Usuario {
 
     @OneToMany(mappedBy = "Usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Direccion> Direcciones = new ArrayList<>();
+    
+    @Column(name = "token")
+    private String token;
 
     public Usuario() {}
 
     public Usuario(int status, int idUsuario, String imagen, String username, String nombre, String apellidoPaterno, String apellidoMaterno, 
-            Date fechaNacimiento, String sexo, String curp, String email, String password, String telefono, String celular, List<Direccion> direcciones) 
+            Date fechaNacimiento, String sexo, String curp, String email, String password, String telefono, String celular, List<Direccion> direcciones, String token) 
     {
-        this.Status = status;
-        this.IdUsuario = idUsuario;
-        this.Imagen = imagen;
+        this.status = status;
+        this.idUsuario = idUsuario;
+        this.imagen = imagen;
         this.username = username;
-        this.Nombre = nombre;
-        this.ApellidoPaterno = apellidoPaterno;
-        this.ApellidoMaterno = apellidoMaterno;
-        this.FechaNacimiento = fechaNacimiento;
-        this.Sexo = sexo;
-        this.Curp = curp;
-        this.Email = email;
-        this.Password = password;
-        this.Telefono = telefono;
-        this.Celular = celular;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.fechaNacimiento = fechaNacimiento;
+        this.sexo = sexo;
+        this.curp = curp;
+        this.email = email;
+        this.password = password;
+        this.telefono = telefono;
+        this.celular = celular;
         this.Direcciones = direcciones;
+        this.token = token;
     }
 
     public void setStatus(int status) 
     {
-        this.Status = status;
+        this.status = status;
     }
     public int getStatus() 
     {
-        return Status;
+        return status;
     }
 
     public void setIdUsuario(int idUsuario) 
     {
-        this.IdUsuario = idUsuario;
+        this.idUsuario = idUsuario;
     }
     public int getIdUsuario() 
     {
-        return IdUsuario;
+        return idUsuario;
     }
 
     public void setImagen(String imagen) 
     {
-        this.Imagen = imagen;
+        this.imagen = imagen;
     }
     public String getImagen() 
     {
-        return Imagen;
+        return imagen;
     }
 
     public void setUsername(String username) 
@@ -131,91 +139,100 @@ public class Usuario {
 
     public void setNombre(String nombre) 
     {
-        this.Nombre = nombre;
+        this.nombre = nombre;
     }
     public String getNombre()
     {
-        return Nombre;
+        return nombre;
     }
 
     public void setApellidoPaterno(String apellidoPaterno) 
     {
-        this.ApellidoPaterno = apellidoPaterno;
+        this.apellidoPaterno = apellidoPaterno;
     }
     public String getApellidoPaterno() 
     {
-        return ApellidoPaterno;
+        return apellidoPaterno;
     }
 
     public void setApellidoMaterno(String apellidoMaterno) 
     {
-        this.ApellidoMaterno = apellidoMaterno;
+        this.apellidoMaterno = apellidoMaterno;
     }
     public String getApellidoMaterno() 
     {
-        return ApellidoMaterno;
+        return apellidoMaterno;
     }
 
     public void setFechaNacimiento(Date fechaNacimiento) 
     {
-        this.FechaNacimiento = fechaNacimiento;
+        this.fechaNacimiento = fechaNacimiento;
     }
     public Date getFechaNacimiento() 
     {
-        return FechaNacimiento;
+        return fechaNacimiento;
     }
 
     public void setSexo(String sexo) 
     {
-        this.Sexo = sexo;
+        this.sexo = sexo;
     }
     public String getSexo()
     {
-        return Sexo;
+        return sexo;
     }
 
     public void setCurp(String curp) 
     {
-        this.Curp = curp;
+        this.curp = curp;
     }
     public String getCurp() 
     {
-        return Curp;
+        return curp;
     }
 
     public void setEmail(String email) 
     {
-        this.Email = email;
+        this.email = email;
     }
     public String getEmail() 
     {
-        return Email;
+        return email;
     }
 
     public void setPassword(String password) 
     {
-        this.Password = password;
+        this.password = password;
     }
     public String getPassword() 
     {
-        return Password;
+        return password;
     }
 
     public void setTelefono(String telefono) 
     {
-        this.Telefono = telefono;
+        this.telefono = telefono;
     }
     public String getTelefono() 
     {
-        return Telefono;
+        return telefono;
     }
 
     public void setCelular(String celular) 
     {
-        this.Celular = celular;
+        this.celular = celular;
     }
     public String getCelular() 
     {
-        return Celular;
+        return celular;
+    }
+    
+    public void setToken(String token)
+    {
+        this.token = token;
+    }
+    public String getToken()
+    {
+        return token;
     }
 }
