@@ -86,9 +86,10 @@ public class UsuarioRestController
                 direccion.Usuario = usuarioDB;
                 iRepositoryDireccion.save(direccion);
             }
-            result.object = usuarioDB;
             
-            emailService.correoVerificacion(usuarioDB.getEmail(), usuarioDB.getNombre(), usuarioDB.getUsername(), password, token);
+            result.object = usuarioDB;  
+            String loginUrl = "http://localhost:8081/login";          
+            emailService.cuentaCreada(usuarioDB.getEmail(), usuarioDB.getNombre(), usuarioDB.getUsername(), password, loginUrl);
             result.correct = true;
             
         } catch (Exception ex) 

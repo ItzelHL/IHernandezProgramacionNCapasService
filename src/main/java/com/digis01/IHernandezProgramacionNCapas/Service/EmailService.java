@@ -21,13 +21,26 @@ public class EmailService
         this.templateEngine = templateEngine;
     } 
     
-    public void correoVerificacion(String destino, String nombre, String username, String password, String token) throws MessagingException 
-    {
-//        String enlace = "http://localhost:8080/api/usuario/verify?token=" + token;
-        String enlace = "http://localhost:8081/login";
-        
+    public void cuentaCreada(String destino, String nombre, String username, String password, String loginUrl) throws MessagingException
+    {   
         Context context = new Context();
-        context.setVariables(Map.of("nombre", nombre, "username", username, "password", password, "enlace", enlace));
+        context.setVariables(Map.of("nombre", nombre, "username", username, "password", password, "loginUrl", loginUrl));
+        String contenidoHtml = templateEngine.process("CuentaCreada.html", context);
+        
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+        
+        helper.setTo(destino);
+        helper.setSubject("Se creó tu cuenta.");
+        helper.setText(contenidoHtml, true);
+        
+        mailSender.send(message);
+    }
+    
+    public void correoVerificacion(String destino, String nombre, String verifyUrl) throws MessagingException 
+    {   
+        Context context = new Context();
+        context.setVariables(Map.of("nombre", nombre, "enlace", verifyUrl));
         
         String contenidoHtml = templateEngine.process("CorreoVerificacion.html", context);
         
@@ -35,7 +48,7 @@ public class EmailService
         MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
         helper.setTo(destino);
-        helper.setSubject("Verificación de cuenta");
+        helper.setSubject("Verifica tu cuenta");
         helper.setText(contenidoHtml, true);
 
         mailSender.send(message);
@@ -57,21 +70,5 @@ public class EmailService
         helper.setText(contenidoHtml, true);
         
         mailSender.send(mensaje);
-    }
-    
-    public void notificacionLogin(String destino, String ipAddress, String location) throws MessagingException 
-    {   
-        Context context = new Context();
-        context.setVariables(Map.of("IPAddress", ipAddress, "location", location));
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true);
-
-        String subject = "New Login Detected";
-
-        helper.setTo(destino);
-        helper.setSubject(subject);
-//        helper.setText(htmlContent, true);  // Set to true to indicate the content is HTML
-
-        mailSender.send(message);
     }
 }

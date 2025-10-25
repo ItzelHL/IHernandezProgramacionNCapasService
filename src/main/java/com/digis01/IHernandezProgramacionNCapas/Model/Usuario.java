@@ -11,6 +11,8 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -77,6 +79,9 @@ public class Usuario
     
     @Column(name = "token")
     private String token;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date tokenExpiry;
 
     public Usuario() {}
 

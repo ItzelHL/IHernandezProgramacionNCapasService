@@ -35,7 +35,7 @@ public class SecurityConfig
                                                 "/api/pais/**", "/api/municipio/**", "/api/municipio/estado/**",
                                                 "/api/estado/**", "/api/estado/pais/**", "/api/direccion/detail/**", 
                                                 "/api/colonia/**","/api/colonia/municipio/**", "/api/usuario/username/**",
-                                                "api/usuario/verify")
+                                                "api/usuario/verify", "auth/verificationstatus", "auth/resendverification", "auth/verify")
                                                 .permitAll()
                         
                                         .requestMatchers(HttpMethod.DELETE, "/api/usuario/**", "/api/direccion/**")
