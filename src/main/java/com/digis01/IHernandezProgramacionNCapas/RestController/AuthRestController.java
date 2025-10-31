@@ -13,12 +13,14 @@ import java.util.UUID;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping("auth")
@@ -46,7 +48,7 @@ public class AuthRestController
 //        return iRepositoryUsuario.save(usuario);
     }
     
-    @PostMapping("/login")
+    @PostMapping("login")
     public ResponseEntity<Map<String, Object>> login(@RequestBody Usuario cred) 
     {
         Usuario dbUser = iRepositoryUsuario.findByUsername(cred.getUsername());
@@ -167,5 +169,78 @@ public class AuthRestController
             return ResponseEntity.status(500).body(Map.of("error", "No se pudo enviar el correo"));
         }
         return ResponseEntity.ok(Map.of("message", "Correo reenviado", "ok", true));
+    }
+    
+    @PostMapping("forgotpassword")
+    public ResponseEntity<Map<String, Object>> forgotPassword(@RequestBody Map<String, String> payload)
+    {
+        String identificador = payload.get("identifier");
+        Usuario usuario = iRepositoryUsuario.findByUsername(identificador);
+        if (usuario == null) 
+        {
+           usuario = iRepositoryUsuario.findByEmail(identificador);
+        }
+        if (usuario == null) 
+        {
+            return ResponseEntity.status(404).body(Map.of("error", "Usuario no encontrado"));
+        }
+        
+        String resetToken = UUID.randomUUID().toString();
+        usuario.setToken(resetToken);
+        usuario.setTokenExpiry(new Date(System.currentTimeMillis() + 10 * 60 * 1000)); // token de 10 minutos
+        iRepositoryUsuario.saveAndFlush(usuario);
+        
+        String resetUrl = "http://localhost:8080/auth/resetpassword?token=" + resetToken;
+        try 
+        {
+            emailService.recuperacionContraseña(usuario.getEmail(), usuario.getUsername(), resetUrl);
+        } catch (Exception ex) 
+        {
+            return ResponseEntity.status(500).body(Map.of("error", "Error al enviar el correo"));
+        }
+        return ResponseEntity.ok(Map.of("message", "Se envió un correo con instrucciones para reestablecer la contraseña"));
+    }
+    
+    @GetMapping("resetpassword")
+    public ModelAndView resetPasswordForm(@RequestParam String token) 
+    {
+        ModelAndView modelAndView = new ModelAndView("ResetPassword");
+        Usuario usuario = iRepositoryUsuario.findByToken(token);
+        
+        if (usuario == null || usuario.getTokenExpiry() == null || usuario.getTokenExpiry().before(new Date())) 
+        {
+            modelAndView.addObject("error", "El enlace es inválido o ha expirado. Solicita uno nuevo.");
+            modelAndView.setViewName("ResetPasswordError");
+            return modelAndView;
+        }
+        
+        modelAndView.addObject("token", token);
+        return modelAndView;
+    }
+    
+    @PostMapping("setnewpassword")
+    public ResponseEntity<Map<String, Object>> resetPassword(@RequestBody Map<String, String> payload)
+    {
+        String token = payload.get("token");
+        String newPassword = payload.get("newPassword");
+        
+        Usuario usuario = iRepositoryUsuario.findByToken(token);
+        if (usuario == null) 
+        {
+            return ResponseEntity.status(400).body(Map.of("error", "Token inválido"));
+        }
+        
+        if (usuario.getTokenExpiry() == null || usuario.getTokenExpiry().before(new Date())) 
+        {
+            return ResponseEntity.status(400).body(Map.of("error", "El enlace ha expirado. Solicita uno nuevo"));
+        }
+        
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+        usuario.setPassword(encoder.encode(newPassword));
+        usuario.setToken(null);
+        usuario.setTokenExpiry(null);
+        iRepositoryUsuario.saveAndFlush(usuario);
+        
+        return ResponseEntity.ok(Map.of("message", "Contraseña restablecida correctamente."));
     }
 }

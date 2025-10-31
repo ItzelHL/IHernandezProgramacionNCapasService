@@ -54,12 +54,10 @@ public class EmailService
         mailSender.send(message);
     }
     
-    public void recuperacionContraseña(String destino, String nombre, String token) throws MessagingException
+    public void recuperacionContraseña(String destino, String username, String resetUrl) throws MessagingException
     {
-        String enlace = "http://localhost:8081/login/resetpassword?token=" + token;
-        
         Context context = new Context();
-        context.setVariables(Map.of("nombre", nombre, "enlace", enlace));
+        context.setVariables(Map.of("username", username, "resetUrl", resetUrl));
         
         String contenidoHtml = templateEngine.process("RecuperacionContraseña.html", context);
         

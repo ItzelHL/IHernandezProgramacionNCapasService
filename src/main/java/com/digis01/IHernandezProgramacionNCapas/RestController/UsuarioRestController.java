@@ -246,7 +246,7 @@ public class UsuarioRestController
        }   
        return ResponseEntity.ok(result);
    }
-    
+
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "OK. El archivo se cargó correctamente."),
         @ApiResponse(responseCode = "400", description = "Bad Request. Verifique el archivo."),
